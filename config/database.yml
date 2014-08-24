@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: shidur_development
+  url: <%= ENV['SHIDUR_DB_DEV'] =%>
+  
+test:
+  <<: *default
+  database: shidur_test
+  url: <%= ENV['SHIDUR_DB_TEST'] =%>
+
+production:
+  <<: *default
+  database: shidur_production
+  url: <%= ENV['SHIDUR_DB_PROD'] =%>
