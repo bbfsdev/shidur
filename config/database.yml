@@ -6,14 +6,14 @@ default: &default
 development:
   <<: *default
   database: shidur_development
-  url: <%= ENV['SHIDUR_DB_DEV'] =%>
-  
+  url: <%= ENV['SHIDUR_DB_DEV'] %>
+
 test:
   <<: *default
   database: shidur_test
-  url: <%= ENV['SHIDUR_DB_TEST'] =%>
+  url: <%= ENV['SHIDUR_DB_TEST'] %>
 
 production:
   <<: *default
   database: shidur_production
-  url: <%= ENV['SHIDUR_DB_PROD'] =%>
+  url: <%= ENV['SHIDUR_DB_PROD'] %>

@@ -1,17 +1,17 @@
 source 'https://rubygems.org'
-gem 'rails', '4.1.1'
+gem 'rails'
 gem 'pg'
-gem 'sass-rails', '~> 4.0.3'
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.0.0'
+gem 'sass-rails'
+gem 'uglifier'
+gem 'coffee-rails'
 gem 'therubyracer',  platforms: :ruby
 gem 'jquery-rails'
 
 # https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
+gem 'jbuilder'
 
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'sdoc', group: :doc
 gem 'thin'
 gem 'devise'
 gem 'devise-i18n'
@@ -19,3 +19,8 @@ gem 'haml'
 gem 'bootstrap-sass'
 gem 'redcarpet'
 gem 'http_accept_language'
+
+group :test, :development do
+  gem 'rspec-rails'
+  gem 'database_cleaner'
+end
