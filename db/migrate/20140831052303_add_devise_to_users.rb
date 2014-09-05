@@ -42,7 +42,7 @@ class AddDeviseToUsers < ActiveRecord::Migration
   end
 
   def self.down
-    change_table(:users) do |t|
+    change_table(:users, force: true) do |t|
       t.remove :email
       t.remove :encrypted_password
 

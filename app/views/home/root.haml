@@ -1,0 +1,33 @@
+.row
+  .col-md-12
+    %ul.nav.nav-tabs{ role: 'tablist' }
+      %li
+        =link_to 'Roles', '#roles', role: :tab, data: { toggle: :tab }
+      %li.active
+        =link_to 'Users', '#users', role: :tab, data: { toggle: :tab }
+      %li
+        =link_to 'Rooms', '#rooms', role: :tab, data: { toggle: :tab }
+    .tab-content
+      .tab-pane.fade#roles
+        %table.stripped.table
+          -Role.all.order(:name).each do |r|
+            %tr
+              %td= r.name
+              %td= r.users.count
+      .tab-pane.fade.in.active#users
+        %table.stripped.table
+          -User.all.order(:role_id, :email).each do |u|
+            %tr
+              %td #{u.name} <#{u.email}>
+              %td= u.role.name
+              %td= u.current_sign_in_at.strftime("%Y-%d-%m %H:%M") if u.current_sign_in_at
+              %td= u.current_sign_in_ip
+              %td
+                -if u.confirmed_at.nil?
+                  not confirmed
+      .tab-pane.fade#rooms
+        %table.stripped.table
+          - Room.all.order(:name).each do |r|
+            %tr
+              %td= r.name
+              %td= r.users.count
