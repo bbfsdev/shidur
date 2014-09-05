@@ -1,4 +1,4 @@
-class CreateUiPresets < ActiveRecord::Migration
+  class CreateUiPresets < ActiveRecord::Migration
   def change
     create_table :ui_presets do |t|
       t.string :name

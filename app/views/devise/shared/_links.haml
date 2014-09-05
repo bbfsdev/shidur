@@ -1,0 +1,20 @@
+.btn-group
+  - if controller_name != 'sessions'
+    = link_to t('devise.log_in_btn'), new_session_path(resource_name), class: 'btn-info btn'
+    %br/
+  - if devise_mapping.registerable? && controller_name != 'registrations'
+    = link_to t('devise.register_btn'), new_registration_path(resource_name), class: 'btn-info btn'
+    %br/
+  - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
+    = link_to t('devise.forgot_password_btn'), new_password_path(resource_name), class: 'btn-info btn'
+    %br/
+  - if devise_mapping.confirmable? && controller_name != 'confirmations'
+    = link_to t('devise.resend_confirmation_btn'), new_confirmation_path(resource_name), class: 'btn-info btn'
+    %br/
+  - if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks'
+    = link_to t('devise.resend_unlock_btn'), new_unlock_path(resource_name), class: 'btn-info btn'
+    %br/
+  - if devise_mapping.omniauthable?
+    - resource_class.omniauth_providers.each do |provider|
+      = link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider), class: 'btn-info btn'
+      %br/

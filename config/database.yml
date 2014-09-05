@@ -5,15 +5,21 @@ default: &default
 
 development:
   <<: *default
-  database: shidur_development
-  url: <%= ENV['SHIDUR_DB_DEV'] %>
+  host: localhost
+  database: <%= ENV['SHIDUR_DEV_DB'] %>
+  username: <%= ENV['SHIDUR_DEV_USER'] %>
+  password: <%= ENV['SHIDUR_DEV_PASS'] %>
 
 test:
   <<: *default
-  database: shidur_test
-  url: <%= ENV['SHIDUR_DB_TEST'] %>
+  host: localhost
+  database: <%= ENV['SHIDUR_TEST_DB'] %>
+  username: <%= ENV['SHIDUR_TEST_USER'] %>
+  password: <%= ENV['SHIDUR_TEST_PASS'] %>
 
 production:
   <<: *default
-  database: shidur_production
-  url: <%= ENV['SHIDUR_DB_PROD'] %>
+  host: localhost
+  database: <%= ENV['SHIDUR_PROD_DB'] %>
+  username: <%= ENV['SHIDUR_PROD_USER'] %>
+  password: <%= ENV['SHIDUR_PROD_PASS'] %>
