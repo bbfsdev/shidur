@@ -1,0 +1,19 @@
+.row
+  .col-md-12
+    = link_to image_tag('add139.svg', height: '30px'), new_user_path
+.row
+  .col-md-12
+    %table.stripped.table
+      - @users.each do |u|
+        %tr
+          %td= link_to "#{u.name} <#{u.email}>", edit_user_path(u)
+          %td= u.role.name
+          %td= u.current_sign_in_at.strftime("%Y-%d-%m %H:%M") if u.current_sign_in_at
+          %td= u.current_sign_in_ip
+          %td
+            -if u.confirmed_at.nil?
+              not confirmed
+          %td
+            -if u.role.name != 'root'
+              =link_to( u, method: :delete, data: { confirm: t('user.confirm_delete', role: u.role.name, name: u.name) }, type: :button) do
+                =image_tag image_url("delete48.svg"), :height => 20

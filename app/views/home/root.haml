@@ -23,23 +23,7 @@
                   %td= link_to r.name, edit_role_path(r)
                   %td= r.users.count
       .tab-pane.fade.in.active#users
-        .row
-          .col-md-12
-            = link_to image_tag('add139.svg', height: '30px'), new_user_path
-        .row
-          %table.stripped.table
-            -User.all.order(:role_id, :email).each do |u|
-              %tr
-                %td= link_to "#{u.name} <#{u.email}>", edit_user_path(u)
-                %td= u.role.name
-                %td= u.current_sign_in_at.strftime("%Y-%d-%m %H:%M") if u.current_sign_in_at
-                %td= u.current_sign_in_ip
-                %td
-                  -if u.confirmed_at.nil?
-                    not confirmed
-                  -if u.role.name != 'root'
-                    =link_to( u, method: :delete, data: { confirm: t('user.confirm_delete', role: u.role.name, name: u.name) }, type: :button) do
-                      =image_tag image_url("delete48.svg"), :height => 20
+        
 
       .tab-pane.fade#rooms
         .row

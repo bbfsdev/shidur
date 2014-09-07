@@ -6,5 +6,10 @@
     = javascript_include_tag 'application'
     = csrf_meta_tags
   %body
-    .container
+    -if user_signed_in?
+      -if File.exist?("app/views/layouts/_#{current_user.role.name}_navigation.haml")
+        =render "layouts/#{current_user.role.name}_navigation"
+      -else
+        =render "layouts/common_navigation"
+    .container#mainbox
       = yield

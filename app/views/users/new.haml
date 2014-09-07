@@ -1,0 +1,43 @@
+.row
+  .col-md-12
+    = form_for(@user, html: { role: 'form', class: 'form-horizontal' }) do |f|
+      .form-group
+        - if @user.errors.any?
+          .alert.alert-danger#error_explanation
+            %ul
+              - @user.errors.full_messages.each do |message|
+                %li= message
+      .form-group
+        =f.label :name, class: 'col-md-3 control-label'
+        .col-md-4
+          =f.text_field :name, class: 'form-control'
+      .form-group
+        =f.label :email, class: 'col-md-3 control-label'
+        .col-md-4
+          =f.email_field :email, class: 'form-control'
+      .form-group
+        =f.label :password, class: 'col-md-3 control-label'
+        .col-md-4
+          =f.text_field :password, class: 'form-control'
+        .col-md-2
+          %button.btn.btn-info#password_generator= t('user.generate_pass_btn')
+      .form-group
+        =f.label :role_id, class: 'col-md-3 control-label'
+        .col-md-4
+          =f.select :role_id, options_for_select(@roles.pluck(:name, :id), @user.role_id), {}, class: 'form-control'
+      .form-group
+        .col-md-4.col-md-offset-2
+          = f.submit t(:save_btn), class: 'btn btn-success'
+
+:javascript
+  $(document).ready(function(){
+    $('#password_generator').click(function(evt){
+      evt.preventDefault();
+      $.ajax({
+        url: '/random-pass',
+        method: 'GET'
+      }).done(function(data){
+        $('#user_password').val(data['pass']);
+      })
+    });
+  });

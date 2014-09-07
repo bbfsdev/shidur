@@ -6,3 +6,7 @@ en:
     resend_unlock_btn: 'Resend unlock key'
   user:
     confirm_delete: 'Really delete %{role} %{name}?'
+    generate_pass_btn: 'Generate password'
+  role:
+    confirm_delete: 'Really delete role "%{role}"? There are %{usercount} users with it.'
+  save_btn: Save

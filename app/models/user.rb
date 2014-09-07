@@ -9,6 +9,18 @@ class User < ActiveRecord::Base
   validates :email, :uniqueness => true
   validate :role_exists
 
+  def role_is?(name)
+    (! self.role_id.nil?) && (self.role.name == name)
+  end
+
+  def method_missing(metoda, *args, &block)
+    if metoda.to_s =~ /^(#{Role.all.pluck(:name).join('|')})\?$/
+      role_is?($1)
+    else
+      super
+    end
+  end
+
   private
     def role_exists
       unless Role.find_by(id: self.role_id)

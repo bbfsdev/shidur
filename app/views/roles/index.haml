@@ -1,0 +1,14 @@
+.row
+  .col-md-12
+    = link_to image_tag('add139.svg', height: '30px'), new_role_path
+.row
+  .col-md-12
+    %table.stripped.table
+      - @roles.each do |r|
+        %tr
+          %td= link_to r.name, edit_role_path(r)
+          %td= r.users.count
+          %td
+            -if r.name != 'root'
+              =link_to( r, method: :delete, data: { confirm: t('role.confirm_delete', role: r.name, usercount: r.users.count) }, type: :button) do
+                =image_tag image_url("delete48.svg"), :height => 20
