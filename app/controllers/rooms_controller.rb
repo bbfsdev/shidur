@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class RoomsController < ApplicationController
   def new
   end 
   def create

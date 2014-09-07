@@ -2,32 +2,52 @@
   .col-md-12
     %ul.nav.nav-tabs{ role: 'tablist' }
       %li
-        =link_to 'Roles', '#roles', role: :tab, data: { toggle: :tab }
+        =link_to '#roles', role: :tab, data: { toggle: :tab } do
+          =image_tag image_url('multiple25.svg'), :height => 30
       %li.active
-        =link_to 'Users', '#users', role: :tab, data: { toggle: :tab }
+        =link_to '#users', role: :tab, data: { toggle: :tab } do
+          =image_tag image_url("black302.svg"), :height => 25
       %li
-        =link_to 'Rooms', '#rooms', role: :tab, data: { toggle: :tab }
+        =link_to '#rooms', role: :tab, data: { toggle: :tab } do
+          =image_tag image_url("stack21.svg"), :height => 25
     .tab-content
       .tab-pane.fade#roles
-        %table.stripped.table
-          -Role.all.order(:name).each do |r|
-            %tr
-              %td= r.name
-              %td= r.users.count
+        .row
+          .col-md-12
+            = link_to image_tag('add139.svg', height: '30px'), new_role_path
+        .row
+          .col-md-12
+            %table.stripped.table
+              -Role.all.order(:name).each do |r|
+                %tr
+                  %td= link_to r.name, edit_role_path(r)
+                  %td= r.users.count
       .tab-pane.fade.in.active#users
-        %table.stripped.table
-          -User.all.order(:role_id, :email).each do |u|
-            %tr
-              %td #{u.name} <#{u.email}>
-              %td= u.role.name
-              %td= u.current_sign_in_at.strftime("%Y-%d-%m %H:%M") if u.current_sign_in_at
-              %td= u.current_sign_in_ip
-              %td
-                -if u.confirmed_at.nil?
-                  not confirmed
+        .row
+          .col-md-12
+            = link_to image_tag('add139.svg', height: '30px'), new_user_path
+        .row
+          %table.stripped.table
+            -User.all.order(:role_id, :email).each do |u|
+              %tr
+                %td= link_to "#{u.name} <#{u.email}>", edit_user_path(u)
+                %td= u.role.name
+                %td= u.current_sign_in_at.strftime("%Y-%d-%m %H:%M") if u.current_sign_in_at
+                %td= u.current_sign_in_ip
+                %td
+                  -if u.confirmed_at.nil?
+                    not confirmed
+                  -if u.role.name != 'root'
+                    =link_to( u, method: :delete, data: { confirm: t('user.confirm_delete', role: u.role.name, name: u.name) }, type: :button) do
+                      =image_tag image_url("delete48.svg"), :height => 20
+
       .tab-pane.fade#rooms
-        %table.stripped.table
-          - Room.all.order(:name).each do |r|
-            %tr
-              %td= r.name
-              %td= r.users.count
+        .row
+          .col-md-12
+            = link_to image_tag('add139.svg', height: '30px'), new_role_path
+        .row
+          %table.stripped.table
+            - Room.all.order(:name).each do |r|
+              %tr
+                %td= link_to r.name, edit_room_path(r)
+                %td= r.users.count

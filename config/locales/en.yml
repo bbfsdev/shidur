@@ -4,3 +4,5 @@ en:
     forgot_password_btn: 'Forgot password?'
     resend_confirmation_btn: 'Resend confirmation key'
     resend_unlock_btn: 'Resend unlock key'
+  user:
+    confirm_delete: 'Really delete %{role} %{name}?'
